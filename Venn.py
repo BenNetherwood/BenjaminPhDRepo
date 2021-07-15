@@ -20,8 +20,8 @@ SC=fileSC.readlines()
 
 TAGS=file.readlines()
 
-TAKE_TAGS= [4, 8, 1]; 
-bDoTwoNOTSQUARECIRC=1 
+TAKE_TAGS= [0, 1, 9]; 
+bDoTwoNOTSQUARECIRC=0 
 bDOSQUARECIRC=1
 
 Conly=0
@@ -70,14 +70,14 @@ for x in dFile_data:
 
   
 
-
-SCrow=SC[TAKE_TAGS[0]]
+if bDOSQUARECIRC==1: 
+   SCrow=SC[TAKE_TAGS[0]]
 # extract out values... 
-strparts=SCrow.split('\t')
-strparts.pop(3)
-strparts[0]=int(strparts[0])
-strparts[1]=int(strparts[1])
-strparts[2]=int(strparts[2])
+   strparts=SCrow.split('\t')
+   strparts.pop(3)
+   strparts[0]=int(strparts[0])
+   strparts[1]=int(strparts[1])
+   strparts[2]=int(strparts[2])
 
 plt.figure(figsize=(4,4))
 
@@ -88,7 +88,7 @@ if bDOSQUARECIRC==0:
       v = venn3(subsets=(Conly, jj28only, concPlusJ28only, J14only, concenptPlus14only, a28plus14only, Maxunioson), set_labels = (TAGS[TAKE_TAGS[0]], TAGS[TAKE_TAGS[1]], TAGS[TAKE_TAGS[2]]))
          
    else:
-      v = venn2(subsets=(Conly, jj28only, concPlusJ28only), set_labels = (TAGS[TAKE_TAGS[0]], TAGS[TAKE_TAGS[1]]))
+      v = venn2(subsets=(Conly+concenptPlus14only, jj28only+a28plus14only, concPlusJ28only), set_labels = (TAGS[TAKE_TAGS[0]], TAGS[TAKE_TAGS[1]]))
       
 if bDOSQUARECIRC==1: 
    v = venn2(subsets=(strparts[0], strparts[1], strparts[2]), set_labels = ('SQUARE', 'CIRCLE'))
